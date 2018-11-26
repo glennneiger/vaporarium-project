@@ -1,0 +1,17 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        baseConfigImageFon:
+            uri_prefix: /images/baseConfigImageFon
+            upload_destination: '%kernel.project_dir%/public/images/baseConfigImageFon'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        baseImageSlider:
+            uri_prefix: /images/baseImageSlider
+            upload_destination: '%kernel.project_dir%/public/images/baseImageSlider'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

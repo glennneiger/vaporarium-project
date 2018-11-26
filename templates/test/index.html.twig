@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Hello !{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% if base %}
+    <h1>{{ base.title }}</h1>
+    <img src="{{ vich_uploader_asset(base, 'imageFile')|imagine_filter('squared_300_300') }}" alt="{{ base.title }}">
+    {% for imageBase in base.imageBaseSlider  %}
+        <img src="{{ vich_uploader_asset(imageBase, 'imageFile')|imagine_filter('squared_300_300') }}" alt="">
+    {% endfor %}
+    {% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/TestController.php'|file_link(0) }}">src/Controller/TestController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/test/index.html.twig'|file_link(0) }}">templates/test/index.html.twig</a></code></li>
-    </ul>
 </div>
 {% endblock %}
