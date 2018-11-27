@@ -37,6 +37,34 @@ class BaseConfig
     private $descriptionTwo;
 
     /**
+     * @var BaseEmail[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\BaseEmail", mappedBy="baseEmail", cascade={"persist"})
+     */
+    private $emails;
+
+    /**
+     * @var BasePhones[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\BasePhones", mappedBy="basePhone", cascade={"persist"})
+     */
+    private $phones;
+
+    /**
+     * @var BaseSocial[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\BaseSocial", mappedBy="baseSocial", cascade={"persist"})
+     */
+    private $social;
+
+    /**
+     * @var BasePartners[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\BasePartners", mappedBy="basePartner", cascade={"persist"})
+     */
+    private $partner;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $googleMapIframeSrc;
@@ -114,6 +142,10 @@ class BaseConfig
     public function __construct()
     {
         $this->imageBaseSlider = new ArrayCollection();
+        $this->emails = new ArrayCollection();
+        $this->phones = new ArrayCollection();
+        $this->social = new ArrayCollection();
+        $this->partner = new ArrayCollection();
     }
 
 
@@ -340,6 +372,130 @@ class BaseConfig
     public function setPublish(?bool $publish): self
     {
         $this->publish = $publish;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BaseEmail[]
+     */
+    public function getEmails(): Collection
+    {
+        return $this->emails;
+    }
+
+    public function addEmail(BaseEmail $email): self
+    {
+        if (!$this->emails->contains($email)) {
+            $this->emails[] = $email;
+            $email->setBaseEmail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmail(BaseEmail $email): self
+    {
+        if ($this->emails->contains($email)) {
+            $this->emails->removeElement($email);
+            // set the owning side to null (unless already changed)
+            if ($email->getBaseEmail() === $this) {
+                $email->setBaseEmail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BasePhones[]
+     */
+    public function getPhones(): Collection
+    {
+        return $this->phones;
+    }
+
+    public function addPhone(BasePhones $phone): self
+    {
+        if (!$this->phones->contains($phone)) {
+            $this->phones[] = $phone;
+            $phone->setBasePhone($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhone(BasePhones $phone): self
+    {
+        if ($this->phones->contains($phone)) {
+            $this->phones->removeElement($phone);
+            // set the owning side to null (unless already changed)
+            if ($phone->getBasePhone() === $this) {
+                $phone->setBasePhone(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BaseSocial[]
+     */
+    public function getSocial(): Collection
+    {
+        return $this->social;
+    }
+
+    public function addSocial(BaseSocial $social): self
+    {
+        if (!$this->social->contains($social)) {
+            $this->social[] = $social;
+            $social->setBaseSocial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSocial(BaseSocial $social): self
+    {
+        if ($this->social->contains($social)) {
+            $this->social->removeElement($social);
+            // set the owning side to null (unless already changed)
+            if ($social->getBaseSocial() === $this) {
+                $social->setBaseSocial(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BasePartners[]
+     */
+    public function getPartner(): Collection
+    {
+        return $this->partner;
+    }
+
+    public function addPartner(BasePartners $partner): self
+    {
+        if (!$this->partner->contains($partner)) {
+            $this->partner[] = $partner;
+            $partner->setBasePartner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(BasePartners $partner): self
+    {
+        if ($this->partner->contains($partner)) {
+            $this->partner->removeElement($partner);
+            // set the owning side to null (unless already changed)
+            if ($partner->getBasePartner() === $this) {
+                $partner->setBasePartner(null);
+            }
+        }
 
         return $this;
     }

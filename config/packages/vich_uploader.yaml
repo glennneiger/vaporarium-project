@@ -15,3 +15,24 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+        basePhoneImageLogo:
+            uri_prefix: /images/basePhoneImageLogo
+            upload_destination: '%kernel.project_dir%/public/images/basePhoneImageLogo'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        baseSocialImage:
+            uri_prefix: /images/baseSocialImage
+            upload_destination: '%kernel.project_dir%/public/images/baseSocialImage'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        basePartnersImage:
+            uri_prefix: /images/basePartnersImage
+            upload_destination: '%kernel.project_dir%/public/images/basePartnersImage'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

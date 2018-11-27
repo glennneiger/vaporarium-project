@@ -36,6 +36,34 @@ class BaseConfigAdmin extends AbstractAdmin
                     'edit'=>'inline',
                     'inline'=>'table'
                 ])
+            ->add('emails',
+                CollectionType::class,
+                ['by_reference'=>false],
+                [
+                    'edit'=>'inline',
+                    'inline'=>'table'
+                ])
+            ->add('phones',
+                CollectionType::class,
+                ['by_reference'=>false],
+                [
+                    'edit'=>'inline',
+                    'inline'=>'table'
+                ])
+            ->add('social',
+                CollectionType::class,
+                ['by_reference'=>false],
+                [
+                    'edit'=>'inline',
+                    'inline'=>'table'
+                ])
+            ->add('partner',
+                CollectionType::class,
+                ['by_reference'=>false],
+                [
+                    'edit'=>'inline',
+                    'inline'=>'table'
+                ])
         ;
 
     }

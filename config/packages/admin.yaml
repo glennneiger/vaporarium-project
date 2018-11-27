@@ -12,3 +12,31 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.baseimage.title, show_in_dashboard: false }
         public: true
+
+    admin.baseemail:
+        class: App\Admin\BaseEmailsAdmin
+        arguments: [~ , App\Entity\BaseEmail , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.baseemails.title, show_in_dashboard: false }
+        public: true
+
+    admin.basephones:
+        class: App\Admin\BasePhonesAdmin
+        arguments: [~ , App\Entity\BasePhones , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.basephones.title, show_in_dashboard: false }
+        public: true
+
+    admin.basesocial:
+        class: App\Admin\BaseSocialAdmin
+        arguments: [~ , App\Entity\BaseSocial , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.basesocial.title, show_in_dashboard: false }
+        public: true
+
+    admin.basepartner:
+        class: App\Admin\BasePartnerAdmin
+        arguments: [~ , App\Entity\BasePartners , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.basepartner.title, show_in_dashboard: false }
+        public: true

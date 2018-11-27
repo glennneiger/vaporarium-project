@@ -21,6 +21,12 @@ class BaseEmail
      */
     private $email;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\BaseConfig", inversedBy="emails")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    private $baseEmail;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +40,18 @@ class BaseEmail
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getBaseEmail(): ?BaseConfig
+    {
+        return $this->baseEmail;
+    }
+
+    public function setBaseEmail(?BaseConfig $baseEmail): self
+    {
+        $this->baseEmail = $baseEmail;
 
         return $this;
     }
