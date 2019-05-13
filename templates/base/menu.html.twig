@@ -1,0 +1,72 @@
+<!-- Меню сайта-->
+<nav class="navbar navbar-expand-lg navbar-dark my-bg-navbar fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="cart-smart">
+        <a class="nav-link" href="{{ path('order_cart') }}">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="js-header-cart" data-href="{{ path('order_header_cart') }}">
+                {{ render(url('order_header_cart')) }}
+            </span>
+        </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('home') }}">Главная <span class="sr-only">(current)</span></a>
+            </li>
+            {% for item in category %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="menu-catalog-{{ item.id }}"
+                       href="{{ path('category_show', {id: item.id}) }}"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.name }}</a>
+                    {% if item.__children %}
+                        <ul class="dropdown-menu second" aria-labelledby="menu-catalog-{{ item.id }}">
+                            {% for subitem in item.__children %}
+                                <li class="dropdown-item">
+                                    <a href="{{ path('category_show', {id: subitem.id}) }}">{{ subitem.name }}</a>
+
+                                    {% if subitem.__children %}
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            {% for subsubitem in subitem.__children %}
+                                                <a class="dropdown-item"
+                                                   href="{{ path('category_show', {id: subsubitem.id}) }}" title="{{ subsubitem.name }}">
+                                                    {{ subsubitem.name }}
+                                                </a>
+                                                {% if not loop.last %}
+                                                    <div class="dropdown-divider"></div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </li>
+                                <div class="dropdown-divider"></div>
+                            {% endfor %}
+                            <a class="dropdown-item"
+                               href="{{ path('category_show', {id: item.id}) }}">Все категории</a>
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="">Товары</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="">О нас</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('order_cart') }}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="js-header-cart" data-href="{{ path('order_header_cart') }}">
+                        {{ render(url('order_header_cart')) }}
+                    </span>
+                    Корзина товаров
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+

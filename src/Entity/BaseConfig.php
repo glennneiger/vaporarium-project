@@ -65,9 +65,14 @@ class BaseConfig
     private $partner;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $googleMapIframeSrc;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $address;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -90,44 +95,6 @@ class BaseConfig
     private $fonRGB;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
-     * @Vich\UploadableField(mapping="baseConfigImageFon", fileNameProperty="imageName", size="imageSize" , mimeType="imageType")
-     *
-     * @var File
-     */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @var string
-     */
-    private $imageName;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     *
-     * @var integer
-     */
-    private $imageSize;
-
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @var string;
-     */
-    private $imageType;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
      * @var BaseImage[]
      *
      * @ORM\OneToMany(targetEntity="App\Entity\BaseImage", mappedBy="baseConfig", cascade={"persist"})
@@ -138,6 +105,48 @@ class BaseConfig
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $publish;
+
+    /**
+     * @Vich\UploadableField(mapping="baseConfigImageFon", fileNameProperty="imageNameFon")
+     *
+     * @var File
+     */
+    private $imageFileFon;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageNameFon;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAtFon;
+
+    /**
+     * @Vich\UploadableField(mapping="baseConfigImageLogo", fileNameProperty="imageNameLogo")
+     *
+     * @var File
+     */
+    private $imageFileLogo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageNameLogo;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAtLogo;
 
     public function __construct()
     {
@@ -247,89 +256,6 @@ class BaseConfig
     {
         $this->fonRGB = $fonRGB;
 
-        return $this;
-    }
-
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
-     */
-    public function setImageFile(?File $image = null): BaseConfig
-    {
-        $this->imageFile = $image;
-
-        if (null !== $image) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-        return $this;
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageName(?string $imageName): BaseConfig
-    {
-        $this->imageName = $imageName;
-        return $this;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function setImageSize(?int $imageSize): BaseConfig
-    {
-        $this->imageSize = $imageSize;
-        return $this;
-    }
-
-    public function getImageSize(): ?int
-    {
-        return $this->imageSize;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageType(): string
-    {
-        return $this->imageType;
-    }
-
-    /**
-     * @param string $imageType
-     */
-    public function setImageType(?string $imageType): BaseConfig
-    {
-        $this->imageType = $imageType;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt(): ?\DateTime
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt): BaseConfig
-    {
-        $this->updatedAt = $updatedAt;
         return $this;
     }
 
@@ -497,6 +423,118 @@ class BaseConfig
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFon
+     */
+    public function setImageFileFon(?File $imageFon = null): BaseConfig
+    {
+        $this->imageFileFon = $imageFon;
+
+        if (null !== $imageFon) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAtFon = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getImageFileFon(): ?File
+    {
+        return $this->imageFileFon;
+    }
+
+    public function setImageNameFon(?string $imageNameFon): BaseConfig
+    {
+        $this->imageNameFon = $imageNameFon;
+        return $this;
+    }
+
+    public function getImageNameFon(): ?string
+    {
+        return $this->imageNameFon;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAtFon(): ?\DateTime
+    {
+        return $this->updatedAtFon;
+    }
+
+    /**
+     * @param \DateTime $updatedAtFon
+     */
+    public function setUpdatedAtFon(\DateTime $updatedAtFon): BaseConfig
+    {
+        $this->updatedAtFon = $updatedAtFon;
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageLogo
+     */
+    public function setImageFileLogo(?File $imageLogo = null): BaseConfig
+    {
+        $this->imageFileLogo = $imageLogo;
+
+        if (null !== $imageLogo) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAtLogo = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getImageFileLogo(): ?File
+    {
+        return $this->imageFileLogo;
+    }
+
+    public function setImageNameLogo(?string $imageNameLogo): BaseConfig
+    {
+        $this->imageNameLogo = $imageNameLogo;
+        return $this;
+    }
+
+    public function getImageNameLogo(): ?string
+    {
+        return $this->imageNameLogo;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAtLogo(): ?\DateTime
+    {
+        return $this->updatedAtLogo;
+    }
+
+    /**
+     * @param \DateTime $updatedAtLogo
+     */
+    public function setUpdatedAtLogo(\DateTime $updatedAtLogo): BaseConfig
+    {
+        $this->updatedAtLogo = $updatedAtLogo;
         return $this;
     }
 

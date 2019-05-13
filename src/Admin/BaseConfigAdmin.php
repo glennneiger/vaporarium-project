@@ -23,12 +23,16 @@ class BaseConfigAdmin extends AbstractAdmin
             ->add('title')
             ->add('description')
             ->add('descriptionTwo')
+            ->add('address')
             ->add('googleMapIframeSrc')
             ->add('fromEmail')
             ->add('toEmail')
             ->add('names')
+            ->add('imageFileLogo',VichImageType::class, ['required'=> false ])
+            ->add('imageFileFon',
+                VichImageType::class,
+                ['required'=> false ])
             ->add('fonRGB')
-            ->add('imageFile',VichImageType::class, ['required'=> false ])
             ->add('imageBaseSlider',
                 CollectionType::class,
                 ['by_reference'=>false],

@@ -1,0 +1,18 @@
+
+{% block subject %}Вопрос от заказчика.{% endblock %}
+
+{% block body_text %}
+    Вопрос от заказчика.
+    Имя: {{ task.name }}
+    Телефон: {{ task.number }}
+    Email:  {{ task.email }}
+    Вопрос: {{ task.question }}
+{% endblock %}
+
+{% block body_html %}
+    Вопрос от заказчика. <br>
+    Имя:{{ task.name }} <br>
+    Телефон: {{ task.number }}<br>
+    Email:  {{ task.email }}<br>
+    Вопроы: {{ task.question }}
+{% endblock %}

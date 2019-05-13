@@ -1,0 +1,31 @@
+
+{% block subject %}{{ base.title }}{% endblock %}
+
+{% block body_text %}
+    Спасибо за Ваш заказ от {{ base.title }}
+    В ближайшее время мы с Вами свяжемся!
+    -------------------------------------
+    {% for phone in base.phones %}
+        {{ phone.number }}
+    {% endfor %}
+    {% for email in base.emails %}
+        {{ email.email }}
+    {% endfor %}
+    {{ base.names }}
+
+{% endblock %}
+
+{% block body_html %}
+    Спасибо за Ваш заказ от {{ base.title }}<br>
+    В ближайшее время мы с Вами свяжемся!<br>
+    -------------------------------------<br>
+    {% for phone in base.phones %}
+        {{ phone.number }}<br>
+    {% endfor %}
+    {% for email in base.emails %}
+        {{ email.email }}<br>
+    {% endfor %}
+    {{ base.names }}
+
+{% endblock %}
+

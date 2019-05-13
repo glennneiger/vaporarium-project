@@ -1,0 +1,21 @@
+.ordered {
+    background-color: rgb(190, 255, 190);
+}
+.table-striped>tbody>tr.ordered:nth-of-type(odd) {
+    background-color: #aaffaa;
+}
+.sent {
+    background-color: #f6ffa8;
+}
+.table-striped>tbody>tr.sent:nth-of-type(odd) {
+    background-color: #fcff8d;
+}
+.done {
+    background-color: #ffa7a2;
+}
+.table-striped>tbody>tr.done:nth-of-type(odd) {
+    background-color: #ff959a;
+}
+.vich-image>a>img{
+    max-width: 30rem;
+}

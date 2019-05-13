@@ -43,29 +43,83 @@ liip_imagine:
 
                     # set the position of the watermark
                 #    position: bottomright
+        squared_50_30:
+
+            # set your image quality defaults
+            jpeg_quality:          85
+            png_compression_level: 8
+
+            # setup the filter steps to apply for this transformation
+            filters:
+
+                # auto rotate the image using EXIF metadata
+                auto_rotate: ~
+
+                # strip the image of all metadata
+                strip: ~
+
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [50, 30]
+                    mode:          inset
+                    allow_upscale: true
+
+                # create border by placing image on larger black background
+                background:
+                    size:     [50, 30]
+                    position: center
+                    color:    '#00060c'
+
         squared_50_50:
 
-                    # set your image quality defaults
-                    jpeg_quality:          85
-                    png_compression_level: 8
+            # set your image quality defaults
+            jpeg_quality:          85
+            png_compression_level: 8
 
-                    # setup the filter steps to apply for this transformation
-                    filters:
+            # setup the filter steps to apply for this transformation
+            filters:
 
-                        # auto rotate the image using EXIF metadata
-                        auto_rotate: ~
+                # auto rotate the image using EXIF metadata
+                auto_rotate: ~
 
-                        # strip the image of all metadata
-                        strip: ~
+                # strip the image of all metadata
+                strip: ~
 
-                        # scale and square the image to the given dimensions
-                        thumbnail:
-                            size:          [50, 50]
-                            mode:          inset
-                            allow_upscale: true
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [50, 50]
+                    mode:          inset
+                    allow_upscale: true
 
-                        # create border by placing image on larger black background
-                        background:
-                            size:     [50, 50]
-                            position: center
-                            color:    '#fff'
+                # create border by placing image on larger black background
+                background:
+                    size:     [50, 50]
+                    position: center
+                    color:    '#fff'
+
+        squared_400_400:
+
+            # set your image quality defaults
+            jpeg_quality:          85
+            png_compression_level: 8
+
+            # setup the filter steps to apply for this transformation
+            filters:
+
+                # auto rotate the image using EXIF metadata
+                auto_rotate: ~
+
+                # strip the image of all metadata
+                strip: ~
+
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [400, 400]
+                    mode:          inset
+                    allow_upscale: true
+
+                # create border by placing image on larger black background
+                background:
+                    size:     [400, 400]
+                    position: center
+                    color:    '#fff'

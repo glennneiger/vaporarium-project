@@ -1,0 +1,20 @@
+{% for subcategory in category %}
+    <div class="card-position">
+        <a class="a_card" href="{{ path('category_show',{id:subcategory.id}) }}">
+            <div class="card card-width category-card">
+                <img class="card-img-top" src="
+                    {%- if subcategory.imageNameCategory -%}
+                        {{ vich_uploader_asset(subcategory, 'imageFileCategory')|imagine_filter('squared_300_300')}}
+                    {%- else -%}
+                        {{ asset('images/baseConfigImageLogo/logo.png')|imagine_filter('squared_300_300') }}
+                    {%- endif -%}"
+                     alt="Перейти на категорию: {{ subcategory.name }}">
+                <div class="card-body category-card-body">
+                    <div class="category-card-title row justify-content-center">
+                        <h5 class="card-title col-12 align-self-center" title="Перейти на категорию: {{ subcategory.name|nl2br }}">{{ subcategory.name|nl2br }}</h5>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}

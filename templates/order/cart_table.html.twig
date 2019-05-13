@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-10 order-title">
+        <h1>Здраствуйте {{ order.user }}!</h1>
+    </div>
+</div>
+{% if order.orderPrice == 0 %}
+    <div class="row">
+        <div class="col-10 left-2rem">
+            <h1>У Вас нет товаров в корзине!</h1>
+        </div>
+    </div>
+    <a class="btn btn-primary left-2rem bottom-2rem" href="{{ path('category_show',{'id':1}) }}">Выбрать товар</a>
+{% else %}
+    <div class="row">
+        <div class="col-10">
+            <h5 class="left-2rem bottom-1rem">Ваш заказ {{ order.date|date("d/m/Y") }}:
+            </h5>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Наименование продукта:</th>
+                <th scope="col">Количество едениц:</th>
+                <th scope="col">Цена за еденицу:</th>
+                <th scope="col">Всего:</th>
+                <th scope="col">Удалить со списка:</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for orderItem in order.orderitems %}
+                <tr>
+                    <th scope="row"><a href="{{ path('product_id',{'id':orderItem.product.id}) }}">{{ orderItem.product.name }}</a></th>
+                    <td>
+                        <input type="number" value="{{ orderItem.quantity }}" min="1" max="99" class="form-control js-cart-item-quantity"
+                               data-item-update-url="{{ path('order_update_item_quantity',{'id': orderItem.id, 'quantity':'--quantity--'}) }}">
+                    </td>
+                    <td>{{ orderItem.price }}</td>
+                    <td>{{ orderItem.value }}</td>
+                    <td>
+                        <a class="btn btn-danger js-delete-order-a"
+                           href="{{ path('delete_order_item',{id:orderItem.id}) }}"
+                           data-toggle="modal" data-target="#confirmationModal">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-10 left-2rem">
+            <h1>Всего к оплате : {{ order.orderprice }} грн.</h1>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary bottom-2rem left-2rem" data-toggle="modal" data-target="#exampleModalLong">
+        Оформить заказ
+    </button>
+{% endif %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">Оформление заказа</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card card-body">
+                {{ form_start(form)}}
+                {{ form_widget(form) }}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Предварительный заказ">
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+

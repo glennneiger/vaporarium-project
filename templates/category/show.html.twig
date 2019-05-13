@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+                <div class="category-title">
+                    {{ category.name }}
+                </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="">
+                {{ category.description }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {{ include('category/category_card.html.twig', {'category':category.subcategories}) }}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <!-- Для карточки продукции перебор продукции идёт по product_card -->
+        {{ include('product/product_card.html.twig', {'product_card':category.products}) }}
+    </div>
+    <style>
+        {% if category.imageNameCategoryFon is not null %}
+        .background{
+            display: block;
+            position: fixed;
+            background: url("{{ vich_uploader_asset(category, 'imageFileCategoryFon') }}") center center no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+        }
+        {% else %}
+        {% if category.fonRGB is not null %}
+        .background{
+            background-image: none;
+            background-color: rgb{{ category.fonRGB }};
+        }
+        {% endif %}
+        {% endif %}
+    </style>
+
+
+{% endblock %}
+{% block title %}
+    {{ category.name }}
+{% endblock %}
+

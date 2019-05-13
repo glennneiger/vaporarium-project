@@ -1,0 +1,42 @@
+<!-- Футер-->
+<div class="container-fluid">
+    <div class="row footer">
+        <div class="col-12 col-md-3 block-footer-contact">
+            Контакты:<br>
+            {% for phone in base.phones %}
+                <img src="{{ vich_uploader_asset(phone, 'imageFile')|imagine_filter('squared_50_30') }}" alt="">
+                {{ phone.number }}
+                <br>
+            {% endfor %}
+            {{ base.names }}
+            <br>
+            Email:<br>
+            {% for email in base.emails %}
+                {{ email.email }}
+                <br>
+            {% endfor %}
+            <div data-mobile-view="true" data-share-size="30" data-like-text-enable="false" data-background-alpha="0.0" data-pid="‎1763015" data-mode="share" data-background-color="#ffffff" data-share-shape="round-rectangle" data-share-counter-size="11" data-icon-color="#ffffff" data-mobile-sn-ids="fb.vk.tw.ok.wh.vb.tm." data-text-color="#000000" data-buttons-color="#ffffff" data-counter-background-color="#ffffff" data-share-counter-type="disable" data-orientation="horizontal" data-following-enable="false" data-sn-ids="fb.tw.tm." data-preview-mobile="false" data-selection-enable="true" data-exclude-show-more="false" data-share-style="5" data-counter-background-alpha="1.0" data-top-button="false" class="uptolike-buttons" ></div>
+        </div>
+        <div class="col-12 col-md-5 block-footer-form">
+            <div class="block-footer-form-title">
+                Сделать заказ, задать вопрос
+            </div>
+            {{ form_start(formQuestion, {'attr': {'action': path('sendquestion')}}) }}
+            {{ form_widget(formQuestion) }}
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Отправить">
+            </div>
+            {{ form_end(formQuestion) }}
+        </div>
+        <div class="col-12 col-md-4 block-footer block-footer-map">
+            <div class="block-footer-map-info">
+                <span>{{ base.title }}</span>
+                <br>
+                АДРЕС
+                <br>
+                {{ base.address }}
+            </div>
+            <iframe src="{{ base.googleMapIframeSrc }}" width="100%" height="70%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>

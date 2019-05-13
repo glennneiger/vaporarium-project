@@ -9,6 +9,13 @@ vich_uploader:
             delete_on_update: true
             delete_on_remove: true
 
+        baseConfigImageLogo:
+            uri_prefix: /images/baseConfigImageLogo
+            upload_destination: '%kernel.project_dir%/public/images/baseConfigImageLogo'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
         baseImageSlider:
             uri_prefix: /images/baseImageSlider
             upload_destination: '%kernel.project_dir%/public/images/baseImageSlider'
@@ -36,3 +43,39 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+        testImage:
+            uri_prefix: /images/testImage
+            upload_destination: '%kernel.project_dir%/public/images/testImage'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        categoryImage:
+            uri_prefix: /images/categoryImage
+            upload_destination: '%kernel.project_dir%/public/images/categoryImage'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        categoryImageFon:
+            uri_prefix: /images/categoryImageFon
+            upload_destination: '%kernel.project_dir%/public/images/categoryImageFon'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        products:
+            uri_prefix: /images/products
+            upload_destination: '%kernel.project_dir%/public/images/products'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        stock:
+            uri_prefix: /images/stock
+            upload_destination: '%kernel.project_dir%/public/images/stock'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+

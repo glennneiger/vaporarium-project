@@ -1,0 +1,42 @@
+
+{% block subject %}Новый заказ {{ order.id }}{% endblock %}
+
+{% block body_text %}
+    Новый заказ № {{ order.id }}
+    Имя:{{ order.firstName }}
+    Фамилия: {{ order.lastName }}
+    Телефон: {{ order.phone }}
+    Email:  {{ order.email }}
+    Коминтарий: {{ order.comment }}
+    {% for OrdIt in order.orderitems %}
+    Наименование продукта: {{ OrdIt.product.name }} ___ Количество едениц: {{ OrdIt.quantity }} ___ Цена за еденицу: {{ OrdIt.price }} ___ Всего: {{ OrdIt.value }}
+    {% endfor %}
+    Всего к оплате : {{ order.orderprice }} грн.
+{% endblock %}
+
+{% block body_html %}
+    Новый заказ № {{ order.id }} <br>
+    Имя:{{ order.firstName }} <br>
+    Фамилия: {{ order.lastName }}<br>
+    Телефон: {{ order.phone }}<br>
+    Email:  {{ order.email }}<br>
+    Коминтарий: {{ order.comment }}<br><br>
+        <table border="1px solid" style="background-color: #F4FFAF" >
+            <tr>
+                <td align="center">Наименование продукта:</td>
+                <td align="center">Количество едениц:</td>
+                <td align="center">Цена за еденицу:</td>
+                <td align="center">Всего:</td>
+            </tr>
+            {% for OrdIt in order.orderitems %}
+                <tr>
+                <td align="center"><a href="{{ path('product_id',{id:OrdIt.product.Id}) }}">{{ OrdIt.product.name }}</a></td>
+                <td align="center">{{ OrdIt.quantity }}</td>
+                <td align="center">{{ OrdIt.price }}</td>
+                <td align="center">{{ OrdIt.value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <h2>Всего к оплате : {{ order.orderprice }} грн.</h2>
+{% endblock %}
+

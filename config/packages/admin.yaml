@@ -40,3 +40,61 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.basepartner.title, show_in_dashboard: false }
         public: true
+
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        arguments: [~ , App\Entity\Category , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.category.title, show_in_dashboard: true }
+        public: true
+
+    admin.test:
+        class: App\Admin\TestAdmin
+        arguments: [~ , App\Entity\Test , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.test.title, show_in_dashboard: true }
+        public: true
+
+    admin.groupproduct:
+        class: App\Admin\GroupProductAdmin
+        arguments: [~ , App\Entity\GroupProduct , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.groupproduct.title, show_in_dashboard: true }
+        public: true
+
+    admin.products:
+        class: App\Admin\ProductAdmin
+        arguments: [~ , App\Entity\Product , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.product.title, show_in_dashboard: true }
+        public: true
+
+    admin.productimage:
+        class: App\Admin\ProductImageAdmin
+        arguments: [~ , App\Entity\ProductImage , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.productimage.title, show_in_dashboard: false }
+        public: true
+
+    admin.stock:
+        class: App\Admin\StockAdmin
+        arguments: [~ , App\Entity\Stock , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.stock.title, show_in_dashboard: true }
+        public: true
+
+    admin.order:
+        class: App\Admin\OrdersAdmin
+        arguments: [~ , App\Entity\Order , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.orders.title }
+        calls:
+            - [setTemplate, ['outer_list_rows_list' ,'admin/Order/row.html.twig' ]]
+        public: true
+
+    admin.order_items:
+        class: App\Admin\OrdersItemsAdmin
+        arguments: [~ , App\Entity\OrderItem , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.order_item.title, show_in_dashboard: false }
+        public: true

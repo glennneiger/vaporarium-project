@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="product-id-title">
+            {{ product.name|nl2br }}
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-5">
+            {# Карусель картинок если они есть#}
+            {% if product.productImage.count!=0 %}
+                <div class="product-slider-container">
+                    <div class="product-slider">
+                        {% for productImage in product.productImage %}
+                            <div class="product-slider-item">
+                                <img class="product-slider-img" src="{{ vich_uploader_asset(productImage, 'imageFile')|imagine_filter('squared_400_400') }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="product-slider-min">
+                        {% for productImage in product.productImage %}
+                            <div class="product-slider-item-min">
+                                <img class="product-slider-img-min" src="{{ vich_uploader_asset(productImage, 'imageFile')|imagine_filter('squared_50_50') }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% else %}
+                <img class="card-img-top product-id-img"  src="
+                            {%- if product.imageName -%}
+                            {{ vich_uploader_asset(product, 'imageFile')|imagine_filter('squared_400_400') }}
+                            {%- else -%}{{ asset('images/baseConfigImageLogo/logo.png')|imagine_filter('squared_400_400') }}
+                            {%- endif -%}"
+                     alt="">
+            {% endif %}
+        </div>
+
+        <div class="col-11 col-md-6">
+            <div class="product-id-short-description product-font-size">
+                {{ product.shortDescription|nl2br }}
+                <br>
+                {% if product.price %}
+                    <h4><b>Цена: {{ product.price }} грн</b></h4>
+                {% else %}
+                    <h4><b>Цена договорная.</b></h4>
+                {% endif %}
+                <a href="" class="btn btn-primary">Добавить в корзину</a>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center">
+        {% if product.description %}
+                <div class="col-11 col-md-10 product-id-description product-font-size">
+                    {{ product.description }}
+                </div>
+        {% endif %}
+
+
+
+
+
+    </div>
+    {% if product.youTube %}
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-8 product-id-video">
+                <iframe class="product-id-video-iframe"  src="{{ product.youTube }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    {% endif %}
+</div>
+    <style>
+        {% if product.category.imageNameCategoryFon is not null %}
+            .background{
+                display: block;
+                position: fixed;
+                background: url("{{ vich_uploader_asset(product.category, 'imageFileCategoryFon') }}") center center no-repeat;
+                background-size: cover;
+                width: 100%;
+                height: 100vh;
+                z-index: 0;
+            }
+        {% else %}
+            {% if product.category.fonRGB is not null %}
+                .background{
+                    background-image: none;
+                    background-color: rgb{{ product.category.fonRGB }};
+                }
+            {% endif %}
+        {% endif %}
+    </style>
+{% endblock %}
+{% block title %}
+    {{ product.name }}
+{% endblock %}
