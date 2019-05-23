@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\Categorys;
+use App\Service\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,11 +15,18 @@ class CategoryController extends AbstractController
      */
     private $categorys;
 
+    /**
+     * @var Products
+     */
+    private $products;
+
     public function __construct(
-        Categorys $categorys
+        Categorys $categorys,
+        Products $products
     )
     {
         $this->categorys = $categorys;
+        $this->products = $products;
     }
 
 
@@ -26,9 +34,18 @@ class CategoryController extends AbstractController
      * @Route("/category/{id}", name="category_show")
      */
     public function categoryShow($id, Request $request){
-        $result = $this->categorys->showCategoryById($id,$request);
+
+        $paramsValues = $this->products->getFiltersParams($request, true);
+        $sortedByPrice = $this->products->getSortedByPrice($request);
+        $result = $this->categorys->showCategoryById($id);
         $category = $result['category'];
+        $products = $this->products->getProductInCategory($id, $request);
+
         return $this->render('category/show.html.twig',[
-            'category' => $category]);
+            'category' => $category,
+            'products' => $products,
+            'paramsValues' => $paramsValues,
+            'sortedByPrice' => $sortedByPrice
+        ]);
     }
 }

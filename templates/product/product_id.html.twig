@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid">
+    <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="product-id-title">
             {{ product.name|nl2br }}
@@ -72,6 +72,31 @@
         </div>
     {% endif %}
 </div>
+
+    <!--Слайдер Акций-->
+    {{ render(controller('App\\Controller\\MainController::stockSlider')) }}
+
+    <!-- Товары isStock -->
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="isTop-title">
+                Акционные товары
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <!-- isStock -->
+        <!-- Для карточки продукции перебор продукции идёт по product_card -->
+        {{ include('product/product_card_21rem.html.twig', {'product_card':productsIsStock}) }}
+    </div>
+    <div class="row justify-content-center home-description-row-background">
+        <div class="col-11 col-md-9">
+            <div class="home-description">
+                {{ base.descriptionTwo|nl2br }}
+            </div>
+        </div>
+    </div>
+
     <style>
         {% if product.category.imageNameCategoryFon is not null %}
             .background{

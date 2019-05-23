@@ -1,0 +1,25 @@
+{% for product in product_card %}
+    <div class="card-position">
+        <div class="card card-width-21rem product-card">
+            <img class="card-img-top"  src="
+                            {%- if product.imageName -%}
+                            {{ vich_uploader_asset(product, 'imageFile')|imagine_filter('squared_300_300') }}
+                            {%- else -%}{{ asset('images/baseConfigImageLogo/logo.png')|imagine_filter('squared_300_300') }}
+                            {%- endif -%}"
+                 alt="">
+            <div class="card-body">
+                <a class="a_card" href="{{ path('product_id',{'id':product.id}) }}">
+                    <h5 class="card-title product-card-title" title="{{ product.name|nl2br }}">{{ product.name|nl2br }}</h5>
+                </a>
+                <p class="card-text product-card-description" title="{{ product.shortDescription}}">{{ product.shortDescription|nl2br }}</p>
+                {% if product.price %}
+                    <p>Цена: {{ product.price }} грн</p>
+                {% else %}
+                    <p>Цену уточняйте.</p>
+                {% endif %}
+                <a href="{{ path('order_add_to_cart', {'id': product.id}) }}" data-product-id="product-done-add-{{ product.id }}" class="btn btn-primary js-add-to-cart">Добавить в корзину</a>
+                <i id="product-done-add-{{ product.id }}" class="far fa-check-circle product-done"></i>
+            </div>
+        </div>
+    </div>
+{% endfor %}

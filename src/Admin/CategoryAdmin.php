@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Sonata\CoreBundle\Form\Type\CollectionType;
 
 class CategoryAdmin extends AbstractAdmin
 {
@@ -29,6 +30,13 @@ class CategoryAdmin extends AbstractAdmin
             ->add('imageFileCategory',VichImageType::class, ['required'=> false ])
             ->add('fonRGB')
             ->add('imageFileCategoryFon',VichImageType::class, ['required'=> false ])
+            ->add('characteristicItemForCategory',
+                CollectionType::class,
+                ['by_reference'=>false],
+                [
+                    'edit'=>'inline',
+                    'inline'=>'table'
+                ])
         ;
 
     }

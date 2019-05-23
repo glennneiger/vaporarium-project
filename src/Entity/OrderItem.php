@@ -19,7 +19,7 @@ class OrderItem
     /**
      * @var Order
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderitems", cascade = {"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderitems", cascade={"persist"})
      * @ORM\JoinColumn(name="order_id", onDelete="CASCADE")
      */
     private $order;

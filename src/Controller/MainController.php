@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\QuestionType;
 use App\Service\Base;
 use App\Service\Categorys;
+use App\Service\Products;
 use App\Service\Mailer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,14 +23,21 @@ class MainController extends AbstractController
      */
     private $categorys;
 
+    /**
+     * @var Products
+     */
+    private $products;
+
     public function __construct(
         Base $base,
-        Categorys $categorys
+        Categorys $categorys,
+        Products $products
 
     )
     {
         $this->base = $base;
         $this->categorys = $categorys;
+        $this->products = $products;
     }
 
     /**
@@ -39,7 +47,8 @@ class MainController extends AbstractController
     {
         return $this->render('base/home.html.twig',[
             'base' => $this->base->getBaseContent(),
-            'category'=> $this->categorys->getChildrenHierarchy()
+            'productsIsTop' => $this->products->getProductInIsTop(),
+            'productsIsStock' => $this->products->getProductInStock()
             ]
         );
     }
@@ -60,7 +69,14 @@ class MainController extends AbstractController
     public function sliderBase()
     {
         return $this->render('base/sliderBase.html.twig',[
-                'base'=> $this->base->getBaseContent()
+            'base'=> $this->base->getBaseContent()
+            ]
+        );
+    }
+
+    public function stockSlider(){
+        return $this->render('base/stock_slider.html.twig',[
+            'stockSlider' => $this->base->getStock()
             ]
         );
     }

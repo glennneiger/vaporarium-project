@@ -15,7 +15,21 @@
                 {{ email.email }}
                 <br>
             {% endfor %}
-            <div data-mobile-view="true" data-share-size="30" data-like-text-enable="false" data-background-alpha="0.0" data-pid="‎1763015" data-mode="share" data-background-color="#ffffff" data-share-shape="round-rectangle" data-share-counter-size="11" data-icon-color="#ffffff" data-mobile-sn-ids="fb.vk.tw.ok.wh.vb.tm." data-text-color="#000000" data-buttons-color="#ffffff" data-counter-background-color="#ffffff" data-share-counter-type="disable" data-orientation="horizontal" data-following-enable="false" data-sn-ids="fb.tw.tm." data-preview-mobile="false" data-selection-enable="true" data-exclude-show-more="false" data-share-style="5" data-counter-background-alpha="1.0" data-top-button="false" class="uptolike-buttons" ></div>
+            <br>
+                Соцсети: <br>
+                {% for social in base.social %}
+                    <a class="social-link" href="{{ social.link }}">
+                        <img title="{{ social.title }}" src="{{ vich_uploader_asset(social, 'imageFile')|imagine_filter('squared_30_30_social') }}" >
+                    </a>
+                {% endfor %} <br><br>
+                Наши партнёры: <br>
+                {% for partner in base.partner %}
+                    <a class="social-link" href="{{ partner.link }}">
+                        <img title="{{ partner.title }}" src="{{ vich_uploader_asset(partner, 'imageFile')|imagine_filter('squared_30_30_social') }}" >
+                    </a>
+                {% endfor %} <br>
+
+
         </div>
         <div class="col-12 col-md-5 block-footer-form">
             <div class="block-footer-form-title">

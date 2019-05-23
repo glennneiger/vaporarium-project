@@ -42,6 +42,13 @@ class Category
     private $description;
 
     /**
+     * @var CharacteristicItemForCategory[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\CharacteristicItemForCategory", mappedBy="characteristicItemForCategory", cascade={"persist"})
+     */
+    private $characteristicItemForCategory;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fonRGB;
@@ -116,6 +123,7 @@ class Category
         $this->name="";
         $this->subcategories = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->characteristicItemForCategory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -351,6 +359,44 @@ class Category
     public function setUpdatedAtCategory(\DateTime $updatedAtCategory): Category
     {
         $this->updatedAtCategory = $updatedAtCategory;
+        return $this;
+    }
+
+    public function setUpdatedAtCategoryFon(?\DateTimeInterface $updatedAtCategoryFon): self
+    {
+        $this->updatedAtCategoryFon = $updatedAtCategoryFon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CharacteristicItemForCategory[]
+     */
+    public function getCharacteristicItemForCategory(): Collection
+    {
+        return $this->characteristicItemForCategory;
+    }
+
+    public function addCharacteristicItemForCategory(CharacteristicItemForCategory $characteristicItemForCategory): self
+    {
+        if (!$this->characteristicItemForCategory->contains($characteristicItemForCategory)) {
+            $this->characteristicItemForCategory[] = $characteristicItemForCategory;
+            $characteristicItemForCategory->setCharacteristicItemForCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCharacteristicItemForCategory(CharacteristicItemForCategory $characteristicItemForCategory): self
+    {
+        if ($this->characteristicItemForCategory->contains($characteristicItemForCategory)) {
+            $this->characteristicItemForCategory->removeElement($characteristicItemForCategory);
+            // set the owning side to null (unless already changed)
+            if ($characteristicItemForCategory->getCharacteristicItemForCategory() === $this) {
+                $characteristicItemForCategory->setCharacteristicItemForCategory(null);
+            }
+        }
+
         return $this;
     }
 

@@ -10,3 +10,9 @@ sirian_suggest:
          product:
              class: App\Entity\Product
              property: name
+         characteristicProduct:
+            class: App\Entity\ProductCharacteristic
+            property: name
+         characteristicValueProduct:
+            class: App\Entity\CharacteristicValue
+            property: valueForAdmin

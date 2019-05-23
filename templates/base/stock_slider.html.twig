@@ -1,0 +1,22 @@
+<!--Слайдер Акций-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="direction">
+                <div class="stock-slider stock-slider-laptop">
+                    {% for image in stockSlider %}
+                            <div class="slider-images-stock-laptop" style="background-image: url({{ vich_uploader_asset(image, 'imageFileForLaptop') }});">
+                            </div>
+                    {% endfor %}
+                </div>
+                <div class="stock-slider stock-slider-mobile">
+                    {% for image in stockSlider %}
+                        <div class="slider-images-stock-mobile" style="background-image: url({{ vich_uploader_asset(image, 'imageFileForMobile') }});">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

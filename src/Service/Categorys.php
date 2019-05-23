@@ -40,7 +40,7 @@ class Categorys
         }
     }
 
-    public function showCategoryById($id, $request){
+    public function showCategoryById($id){
         $rep = $this->em->getRepository(Category::class);
 
         $dbCat = $rep->createQueryBuilder('cat');
@@ -60,20 +60,30 @@ class Categorys
             break;
         }
 
+        if($result['category'] == null && $subcategoryIsNotNull == true){
+            foreach ($categoryOne->getSubcategories() as $subcategory){
+                $categoryOne->removeSubcategory($subcategory);
+            }
+            $result['category'] = $categoryOne;
+        }
+
         if($subcategoryIsNotNull == false){
             $dbCat = $rep->createQueryBuilder('cat');
             $dbCat
                 ->leftJoin('cat.subcategories', 'subcat')
-                ->select('cat,subcat')
+                ->leftJoin('cat.products', 'products')
+                ->leftJoin('cat.characteristicItemForCategory', 'characteristic')
+                ->leftJoin('characteristic.CharacteristicProduct', 'characteristicProduct')
+                ->leftJoin('characteristicProduct.characteristicValue', 'characteristicValue')
+                ->select('cat,subcat,products,characteristic,characteristicProduct,characteristicValue')
                 ->where('cat.id = :id AND cat.publish = true')
                 ->setParameter('id',$id);
             $categoryResult = $dbCat->getQuery()->getOneOrNullResult();
             $result['category'] = $categoryResult;
-            return $result;
         }
 
         return $result;
 
-    }
+}
 
 }

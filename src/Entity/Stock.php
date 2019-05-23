@@ -34,6 +34,13 @@ class Stock
     private $imageNameForLaptop;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAtImageNameForLaptop;
+
+    /**
      * @Vich\UploadableField(mapping="stock", fileNameProperty="imageNameForMobile")
      *
      * @var File
@@ -46,6 +53,13 @@ class Stock
      * @var string
      */
     private $imageNameForMobile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAtImageNameForMobile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -63,6 +77,12 @@ class Stock
     public function setImageFileForLaptop(?File $image = null): Stock
     {
         $this->imageFileForLaptop = $image;
+
+        if (null !== $image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAtImageNameForLaptop = new \DateTimeImmutable();
+        }
 
     return $this;
     }
@@ -84,11 +104,35 @@ class Stock
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getUpdatedAtImageNameForLaptop(): ?\DateTime
+    {
+        return $this->updatedAtImageNameForLaptop;
+    }
+
+    /**
+     * @param \DateTime $updatedAtImageNameForLaptop
+     */
+    public function setUpdatedAtImageNameForLaptop(\DateTime $updatedAt): Stock
+    {
+        $this->updatedAtImageNameForLaptop = $updatedAt;
+
+        return $this;
+    }
+
+    /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      */
     public function setImageFileForMobile(?File $image = null): Stock
     {
         $this->imageFileForMobile = $image;
+
+        if (null !== $image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAtImageNameForMobile = new \DateTimeImmutable();
+        }
 
         return $this;
     }
@@ -107,6 +151,24 @@ class Stock
     public function getImageNameForMobile(): ?string
     {
         return $this->imageNameForMobile;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAtImageNameForMobile(): ?\DateTime
+    {
+        return $this->updatedAtImageNameForMobile;
+    }
+
+    /**
+     * @param \DateTime $updatedAtImageNameForMobile
+     */
+    public function setUpdatedAtImageNameForMobile(\DateTime $updatedAt): Stock
+    {
+        $this->updatedAtImageNameForMobile = $updatedAt;
+
+        return $this;
     }
 
     public function getName(): ?string

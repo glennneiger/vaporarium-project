@@ -1,5 +1,10 @@
 admin.category.title: Управление категориями
 admin.product.title: Управление товаром
-admin.base.title: Управление главным контентом
+admin.baseConfig.title: Управление глав. контентом
 admin.orders.title: Управление заказами
 admin.question.title: Вопросы с сайта
+admin.product_haracteristic.title: Характеристики товаров
+admin.stock.title: Акции
+admin.groupproduct.title: Группы товаров
+admin.characteristic_calue.title: Значения характ. товаров
+Product List: Список товаров

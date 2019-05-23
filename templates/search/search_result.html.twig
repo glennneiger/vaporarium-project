@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if not products %}
+        <div class="row justify-content-center">
+            <div class="error-title">
+                <h3>Нет результата поиска</h3>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if products %}
+        <div class="row justify-content-center">
+            <!-- Для карточки продукции перебор продукции идёт по product_card -->
+            {{ include('product/product_card_21rem.html.twig', {'product_card':products}) }}
+        </div>
+        <div class="row justify-content-center">
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(products) }}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block title %}
+    Результат поиска
+{% endblock %}

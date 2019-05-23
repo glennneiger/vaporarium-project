@@ -37,7 +37,7 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
     private $price;
 
@@ -113,10 +113,19 @@ class Product
      */
     private $orderItems;
 
+    /**
+     * @var CharacteristicItemForProduct[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\CharacteristicItemForProduct", mappedBy="product", cascade={"persist"})
+     */
+    private $characteristicItemForProduct;
+
     public function __construct()
     {
+        $this->name = "";
         $this->productImage = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
+        $this->characteristicItemForProduct = new ArrayCollection();
     }
 
     public function __toString()
@@ -366,6 +375,37 @@ class Product
             // set the owning side to null (unless already changed)
             if ($orderItem->getProduct() === $this) {
                 $orderItem->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CharacteristicItemForProduct[]
+     */
+    public function getCharacteristicItemForProduct(): Collection
+    {
+        return $this->characteristicItemForProduct;
+    }
+
+    public function addCharacteristicItemForProduct(CharacteristicItemForProduct $characteristicItemForProduct): self
+    {
+        if (!$this->characteristicItemForProduct->contains($characteristicItemForProduct)) {
+            $this->characteristicItemForProduct[] = $characteristicItemForProduct;
+            $characteristicItemForProduct->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCharacteristicItemForProduct(CharacteristicItemForProduct $characteristicItemForProduct): self
+    {
+        if ($this->characteristicItemForProduct->contains($characteristicItemForProduct)) {
+            $this->characteristicItemForProduct->removeElement($characteristicItemForProduct);
+            // set the owning side to null (unless already changed)
+            if ($characteristicItemForProduct->getProduct() === $this) {
+                $characteristicItemForProduct->setProduct(null);
             }
         }
 

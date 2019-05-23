@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use App\Entity\BaseConfig;
+use App\Entity\Stock;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Base
@@ -25,6 +26,12 @@ class Base
         $base = $rep->findOneBy(array('publish'=>true));
         return $base;
 
+    }
+
+    public function getStock(){
+        $rep = $this->em->getRepository(Stock::class);
+        $stock = $rep->findAll();
+        return $stock;
     }
 
 }

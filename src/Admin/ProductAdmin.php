@@ -33,6 +33,13 @@ class ProductAdmin extends AbstractAdmin
                     'edit'=>'inline',
                     'inline'=>'table'
                 ])
+            ->add('characteristicItemForProduct',
+                CollectionType::class,
+                ['by_reference'=>false],
+                [
+                    'edit'=>'inline',
+                    'inline'=>'table'
+                ])
         ;
 
     }
@@ -53,6 +60,9 @@ class ProductAdmin extends AbstractAdmin
         $filter
             ->add('name')
             ->add('price')
+            ->add('group')
+            ->add('category')
+            ->add('comments')
         ;
     }
 

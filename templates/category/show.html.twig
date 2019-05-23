@@ -16,10 +16,143 @@
             {{ include('category/category_card.html.twig', {'category':category.subcategories}) }}
         </div>
     </div>
-    <div class="row justify-content-center">
-        <!-- Для карточки продукции перебор продукции идёт по product_card -->
-        {{ include('product/product_card.html.twig', {'product_card':category.products}) }}
-    </div>
+    {% if products or paramsValues %}
+
+        <!-- Фильтры меньше 768 px -->
+        <div class="product-filter-container-display-min">
+            <div class="row justify-content-center">
+                <div class="col-11 ">
+                    <div class="filter-button-collapse">
+                        <p><a class="btn btn-primary" data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Задать фильтр
+                            </a></p>
+                    </div>
+                    <div class="collapse" id="collapseFilters">
+                        <div class="product-filter-content">
+                            <div class="">
+                                <h5>Подбор по параметрам:</h5>
+                            </div>
+                            <form action="">
+                                <h6>Цены:</h6>
+                                <label>
+                                    <input type="radio" value="up" name="price"
+                                            {% if sortedByPrice == "ASC" %}
+                                                checked
+                                            {% endif %}
+                                    >По возростанию
+                                </label>
+                                <label>
+                                    <input type="radio" value="down" name="price"
+                                            {% if sortedByPrice == "DESC" %}
+                                                checked
+                                            {% endif %}
+                                    >По снижению
+                                </label>
+                                {% for characteristic in category.characteristicItemForCategory %}
+                                    <h6>{{ characteristic.characteristicProduct }}:</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for value in characteristic.characteristicProduct.characteristicValue%}
+                                            <li class="list-group-item">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           name="characteristic[]"
+                                                           value="{{ characteristic.characteristicProduct.id }}-{{ value.id  }}"
+                                                            {% for parValue in paramsValues %}
+                                                                {% if value.id == parValue %}
+                                                                    checked
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                    >
+                                                    {{ value.value }}
+                                                </label>
+                                            </li>
+                                        {% endfor %}
+                                    </ul><br>
+                                {% endfor %}
+                                <div class="filter-button-canteiner">
+                                    <button type="submit" class="btn btn-primary filter-button">Применить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Конец : Фильтры меньше 768 px -->
+
+        <!-- Фильтры больше 768 px -->
+        <div class="row justify-content-center">
+                <div class="col-xl-2 col-lg-3 col-md-3 product-filter-container-display product-filter-container">
+                    <div class="product-filter-content">
+                        <div class="">
+                            <h5>Подбор по параметрам:</h5>
+                        </div>
+                        <form action="">
+                            <h6>Цены:</h6>
+                            <label>
+                                <input type="radio" value="up" name="price"
+                                        {% if sortedByPrice == "ASC" %}
+                                            checked
+                                        {% endif %}
+                                >По возростанию
+                            </label>
+                            <label>
+                                <input type="radio" value="down" name="price"
+                                        {% if sortedByPrice == "DESC" %}
+                                            checked
+                                        {% endif %}
+                                >По снижению
+                            </label>
+                            {% for characteristic in category.characteristicItemForCategory %}
+                                <h6>{{ characteristic.characteristicProduct }}:</h6>
+                                <ul class="list-group list-group-flush">
+                                    {% for value in characteristic.characteristicProduct.characteristicValue%}
+                                        <li class="list-group-item">
+                                            <label>
+                                                <input type="checkbox"
+                                                       name="characteristic[]"
+                                                       value="{{ characteristic.characteristicProduct.id }}-{{ value.id  }}"
+                                                        {% for parValue in paramsValues %}
+                                                            {% if value.id == parValue %}
+                                                                checked
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                >
+                                                {{ value.value }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul><br>
+                            {% endfor %}
+                            <div class="filter-button-canteiner">
+                                <button type="submit" class="btn btn-primary filter-button">Применить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xl-10 col-lg-9 col-md-9 ">
+                    <div class="row justify-content-center">
+                        {% if paramsValues and not products%}
+                            <div class="error-title">
+                                <h3>Нет товров по заданными параметрами</h3>
+                            </div>
+                        {% endif %}
+                        <!-- Для карточки продукции перебор продукции идёт по product_card -->
+                        {{ include('product/product_card.html.twig', {'product_card':products}) }}
+                    </div>
+                    {% if products %}
+                        <div class="row justify-content-center">
+                            {# display navigation #}
+                            <div class="navigation">
+                                {{ knp_pagination_render(products) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        <!-- Конец : Фильтры больше 768 px -->
+
+    {% endif %}
     <style>
         {% if category.imageNameCategoryFon is not null %}
         .background{

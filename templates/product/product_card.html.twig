@@ -15,7 +15,7 @@
                 {% if product.price %}
                     <p>Цена: {{ product.price }} грн</p>
                 {% else %}
-                    <p>Цена уточняйте.</p>
+                    <p>Цену уточняйте.</p>
                 {% endif %}
                 <a href="{{ path('order_add_to_cart', {'id': product.id}) }}" data-product-id="product-done-add-{{ product.id }}" class="btn btn-primary js-add-to-cart">Добавить в корзину</a>
                 <i id="product-done-add-{{ product.id }}" class="far fa-check-circle product-done"></i>

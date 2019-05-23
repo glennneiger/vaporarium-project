@@ -2,6 +2,59 @@
 {% block body %}
     <!--Слайдер-->
     {{ render(controller('App\\Controller\\MainController::sliderBase')) }}
+    <!--О компании-->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-11">
+                <div class="home-title">
+                    {{ base.title|nl2br }}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center home-description-row-background">
+            <div class="col-11 col-md-9">
+                <div class="home-description">
+                    {{ base.description|nl2br }}
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!--Слайдер Акций-->
+    {{ render(controller('App\\Controller\\MainController::stockSlider')) }}
+
+    <!-- Товары isTop -->
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="isTop-title">
+                Топ продаж
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <!-- isTop -->
+        <!-- Для карточки продукции перебор продукции идёт по product_card -->
+        {{ include('product/product_card_21rem.html.twig', {'product_card':productsIsTop}) }}
+    </div>
+    <!-- Товары isStock -->
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="isTop-title">
+                Акционные товары
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <!-- isStock -->
+        <!-- Для карточки продукции перебор продукции идёт по product_card -->
+        {{ include('product/product_card_21rem.html.twig', {'product_card':productsIsStock}) }}
+    </div>
+    <div class="row justify-content-center home-description-row-background">
+        <div class="col-11 col-md-9">
+            <div class="home-description">
+                {{ base.descriptionTwo|nl2br }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

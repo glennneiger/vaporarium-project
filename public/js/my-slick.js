@@ -22,3 +22,13 @@ $('.direction-blocks').slick(
     fade:true,
     speed:2000
     });
+$('.stock-slider').slick(
+    {
+        autoplay:true,
+        autoplaySpeed:3000,
+        arrows:false,
+        draggable:false,
+        pauseOnHover:false,
+        fade:true,
+        speed:2000
+    });

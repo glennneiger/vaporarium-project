@@ -98,3 +98,38 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.order_item.title, show_in_dashboard: false }
         public: true
+
+    admin.product_characteristic:
+        class: App\Admin\ProductCharacteristicAdmin
+        arguments: [~ , App\Entity\ProductCharacteristic , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.product_haracteristic.title, show_in_dashboard: true }
+        public: true
+
+    admin.characteristic_value:
+        class: App\Admin\CharacteristicValueAdmin
+        arguments: [~ , App\Entity\CharacteristicValue , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.characteristic_calue.title, show_in_dashboard: true }
+        public: true
+
+    admin.characteristic_item_for_category:
+        class: App\Admin\CharacteristicItemForCategoryAdmin
+        arguments: [~ , App\Entity\CharacteristicItemForCategory , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.characteristic_item_for_category.title, show_in_dashboard: false }
+        public: true
+
+    admin.characteristic_item_for_product:
+        class: App\Admin\CharacteristicItemForProductAdmin
+        arguments: [~ , App\Entity\CharacteristicItemForProduct , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.characteristic_item_for_category.product, show_in_dashboard: false }
+        public: true
+
+    admin.question:
+        class: App\Admin\QuestionAdmin
+        arguments: [~ , App\Entity\Question , ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.question.title, show_in_dashboard: true }
+        public: true
