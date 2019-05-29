@@ -42,6 +42,7 @@ class Search
             $request->query->getInt('page', 1)/*page number*/,
             12/*limit per page*/
         );
+
         return $productsResult;
     }
 
