@@ -48,13 +48,6 @@ services:
             - { name: sonata.admin, manager_type: orm, label: admin.category.title, show_in_dashboard: true }
         public: true
 
-    admin.test:
-        class: App\Admin\TestAdmin
-        arguments: [~ , App\Entity\Test , ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.test.title, show_in_dashboard: true }
-        public: true
-
     admin.groupproduct:
         class: App\Admin\GroupProductAdmin
         arguments: [~ , App\Entity\GroupProduct , ~]

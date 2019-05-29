@@ -51,11 +51,7 @@ class Products
             $arr[] = $id['id'];
         }
         shuffle($arr);
-        $strQuery = "";
-        for($i=0;$i<6;$i++){
-            $strQuery .= ",$arr[$i]";
-        }
-        $strQuery = ltrim($strQuery,',');
+        $strQuery = implode(",",array_slice($arr,0,6));
         $dbProducts
             ->select('prod')
             ->where("prod.id IN ($strQuery)");
@@ -86,11 +82,7 @@ class Products
             $arr[] = $id['id'];
         }
         shuffle($arr);
-        $strQuery = "";
-        for($i=0;$i<6;$i++){
-            $strQuery .= ",$arr[$i]";
-        }
-        $strQuery = ltrim($strQuery,',');
+        $strQuery = implode(",",array_slice($arr,0,6));
         $dbProducts
             ->select('prod')
             ->where("prod.id IN ($strQuery)");
@@ -107,11 +99,7 @@ class Products
             $resultForCharItemMod = [];
             $charI = 0;
             foreach($filterParamsArr as $itemProductCharacteristic =>$values){
-                $valueStr = "";
-                foreach ($values as $value){
-                    $valueStr .= ",".$value;
-                }
-                $valueStr = ltrim($valueStr,",");
+                $valueStr = implode(",",$values);
                 $dbCharProdItem = $repCharacteristicItemForProduct->createQueryBuilder('char');
                 $dbCharProdItem
                     ->leftJoin('char.product','product')
@@ -119,7 +107,9 @@ class Products
                     ->select('product.id')
                     ->where("cat.id = $categoryId AND char.productCharacteristic = $itemProductCharacteristic AND char.characteristicValue IN ($valueStr)");
                 $resultForCharItem = $dbCharProdItem->getQuery()->getResult();
-
+                    if($resultForCharItem == []){
+                        return null;
+                    }
                 foreach ($resultForCharItem as $item =>$val){
                     $resultForCharItemMod[$charI][] = $val['id'];
                 }
@@ -134,11 +124,7 @@ class Products
                     $arrResult = array_intersect($arrResult,$resultForCharItemMod[$i+1]);
                 }
             }
-            $resultStr = "";
-            foreach ($arrResult as $resItem=>$val){
-                $resultStr .=','.$val;
-            }
-            $resultStr = ltrim($resultStr,',');
+            $resultStr = implode(",",$arrResult);
             if($resultStr == ""){
                 return null;
             }
